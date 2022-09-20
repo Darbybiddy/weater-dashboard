@@ -1,2 +1,8 @@
+*{
+box-sizing: border-box;
+border: solid gray;
+}
 
-
+.city-info{
+    background-color: bisque;
+}
