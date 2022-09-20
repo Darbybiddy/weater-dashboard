@@ -3,6 +3,27 @@ box-sizing: border-box;
 border: solid gray;
 }
 
+body{
+    margin: 20px;
+}
+
+main{
+    display: flex;
+    flex-wrap: wrap;
+}
+ 
 .city-info{
-    background-color: bisque;
+    display: flex;
+    justify-content:space-between;
+    border: solid red;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.card{
+    background-color: rgb(75, 75, 159);
 }

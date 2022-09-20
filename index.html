@@ -9,24 +9,100 @@
   </head>
 
   <body>
-    <div class="title-weather">
-      <h1>Weather Dashboard</h1>
-    </div>
+    <div class="container min-100-vh">
+      <div class="title-weather">
+        <h1>Weather Dashboard</h1>
+      </div>
 
-    <div class="search-bar">
-      <h2>Search for a City:</h2>
-      <input type="text" />
-      <button type="submit" class="search-btn">Search</button>
-    </div>
-
-    <div class="container">
-      <div class="city-info">info</div>
-
-      <div class="forecasts">
-        <h2>5-Day Forecasts:</h2>
+      <main class="container flex-row justify-space-between">
+        <div class="flex-row justify-space-between">
+          <div class="col-12 col-md-4">
+            <div class="search-bar">
+              <h3 class="city-title">Search for a City</h3>
+              <form class="city-form">
+                <input name="city-text" id="city-names" type="text" />
+                <button type="submit" class="search-btn">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+     
+     
+      <div class="row">
+        <div class="col-12 col-md-10">
+          <div class="city-info">info</div>
+        </div>
       </div>
     </div>
-    
+ </main>
+
+
+    <section>
+        <div class="forecasts">
+            
+         <h2>5-Day Forecasts:</h2>
+
+          <div class="row d-flex">
+            <div class="cards col-12 col-md-4 col-lg-8">
+              <div class="card" style="width: 8rem">
+                <h5 class="card-date">Card title</h5>
+                <img class="icon" src="#" />
+                <div class="card-1">
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card" style="width: 8rem">
+                <h5 class="card-date">Card title</h5>
+                <img class="icon" src="#" />
+                <div class="card-2">
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card" style="width: 8rem">
+                <h5 class="card-date">Card title</h5>
+                <img class="icon" src="#" />
+                <div class="card-3">
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card" style="width: 8rem">
+                <h5 class="card-date">Card title</h5>
+                <img class="icon" src="#" />
+                <div class="card-4">
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+
+              <div class="card" style="width: 8rem">
+                <h5 class="card-date">Card title</h5>
+                <img class="icon" src="#" />
+                <div class="card-5">
+                  <p class="card-text">
+                    Some quick example text to build on the card title and make
+                    up the bulk of the card's content.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div> 
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
