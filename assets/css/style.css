@@ -22,6 +22,7 @@ main{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    margin-left: 30%;
 }
 
 .card{
