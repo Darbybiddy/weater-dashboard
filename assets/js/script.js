@@ -15,7 +15,8 @@ var citySearch = document.querySelector("#city-names")
 var searchButton = document.querySelector(".search-btn")
 var titleWeather = document.querySelector("#current-date")
 titleWeather.textContent = currentDate
-
+var displayInfoEl = document.querySelector(".city-info")
+var userInput;
 var apiKey = "2c7427a61257c9ff1af20d7fb03dd9bf"
 
 function getCurrentWeather (city){
@@ -28,34 +29,44 @@ fetch (url)
 .then ((data)=>{
 
     console.log(data)
-    var lat = data.coord.lat
-    var lon = data.coord.lon
+    var lat = data.coord.lat;
+    var lon = data.coord.lon;
 getOneCall(lat,lon)
 })
+}
+
+function displayInfo(data){
+    var cityNameEl = document.createElement("h2");
+    cityNameEl.textContent = userInput; 
+   var tempEl = document.createElement("p");
+   tempEl.textContent = data.main.temp
+   console.log(data.main.temp)
+
+    displayInfoEl.append(cityNameEl);
 }
 
 function getOneCall (lat,lon){
     console.log(lat,lon)
 
-    var url = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={minutely,hourly,alerts}&appid=${apiKey}&units=imperial`
+    var url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={minutely,hourly,alerts}&appid=${apiKey}&units=imperial`
     fetch (url)
     .then ((res)=>{
         return res.json();
     })
     .then ((data)=>{
-        console.log(data)
+        console.log(data);
+        displayInfo(data);
         //Add two functions - one to display the current weathher another to display the forecast
         //call the fucntion here
     })
 }
 // declare the fucntions here
 
+
 searchButton.addEventListener("click", (event)=>{
     event.preventDefault()
-    var userInput = citySearch.value
+    userInput = citySearch.value
     
     getCurrentWeather(userInput)
 });
-
-
 
