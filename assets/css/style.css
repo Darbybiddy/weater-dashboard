@@ -13,7 +13,6 @@ main{
 }
  
 .city-info{
-    display: flex;
     justify-content:space-between;
     border: solid red;
 }
