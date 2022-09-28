@@ -1,3 +1,7 @@
+var cityStorage = []
+cityStorage = JSON.parse(localStorage.getItem("searchHistory"))|| []
+var searchHistoryBtn = document.getElementById("search-history-btn")
+
 var currentDate = moment().format("MM/DD/YYYY");
 
 var citySearch = document.querySelector("#city-names");
@@ -13,10 +17,9 @@ var currentHumidityEl = document.getElementById("current-humidity");
 var currentCityNameEl = document.getElementById("current-name");
 var currentIconEl = document.getElementById("current-icon");
 
-var dayOneTempEl = document.getElementById("day-one-temp");
-var dayOneWindEl = document.getElementById("day-one-wind");
-var dayOneHumidityEl = document.getElementById("day-one-humidity");
-var dayOneIconEl = document.getElementById("day-one-icon");
+
+var forecastCol = document.getElementById("forecast-col")
+var forecastDate = moment().format("MM/DD/YYYY");
 
 function getCurrentWeather(city) {
   console.log(city);
@@ -35,7 +38,7 @@ function getCurrentWeather(city) {
 }
 
 function displayInfo(data) {
-  currentCityNameEl.textContent = userInput;
+  currentCityNameEl.textContent = data.name;
   currentTempEl.textContent = `Temp: ${data.main.temp} F`;
   console.log(data.main.temp);
   currentHumidityEl.textContent = `Humidity: ${data.main.humidity} %`;
@@ -44,15 +47,34 @@ function displayInfo(data) {
   currentIconEl.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
 }
 function displayForecast(data) {
-  for (i = 0; i < data; i++) {
-    // need to add it to every card, so that i dont have to keep adding the same code for each card.
-  }
+    var forecastDays = 5
+forecastCol.innerHTML = ""
 
-  dayOneTempEl.textContent = `Temp: ${data.list[0].main.temp} F`;
-  dayOneHumidityEl.textContent = `Humidity: ${data.list[0].main.humidity} %`;
-  dayOneWindEl.textContent = `wind: ${data.list[0].wind.speed} MPH`;
+  for (i = 0; i < forecastDays; i++) {
+var card = document.createElement("div")
+card.setAttribute ("class", "card")
+var cardDate = document.createElement("h5")
+cardDate.setAttribute ("class", "cardDate")
+var forDt = i * 8 + 4
+var day = new Date(data.list[forDt].dt * 1000)
+cardDate.textContent = day.toDateString()
+var icon = document.createElement("img")
+icon.setAttribute ("src", "http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png")
+var cardBody = document.createElement("div")
+cardBody.setAttribute("class", "card-body")
+var temp = document.createElement ("p")
+var humidity = document.createElement ("p")
+var wind = document.createElement ("p")
 
-  dayOneIconEl.src = `http://openweathermap.org/img/w/${data.list[0].weather[0].icon}.png`;
+  temp.textContent = `Temp: ${data.list[i].main.temp} F`;
+  humidity.textContent = `Humidity: ${data.list[i].main.humidity} %`;
+  wind.textContent = `wind: ${data.list[i].wind.speed} MPH`;
+
+  cardBody.append(temp,humidity,wind)
+  card.append(cardDate, icon, cardBody)
+  forecastCol.append(card)
+  
+} 
 }
 function getOneCall(lat, lon) {
   console.log(lat, lon);
@@ -67,11 +89,38 @@ function getOneCall(lat, lon) {
       displayForecast(data);
     });
 }
-// declare the fucntions here
+function storage (city){
+    cityStorage = JSON.parse(localStorage.getItem("searchHistory"))|| []
+if (!cityStorage.includes(city)){
+    cityStorage.push(city)
+    localStorage.setItem("searchHistory", JSON.stringify(cityStorage))
+
+}
+
+}
+
+function historyBtn(city){
+    //if the city is not there then dont create the button 
+    //if city is written twice then dont duplicate it 
+    var btn = document.createElement ("button")
+    btn.setAttribute("class", "city")
+    btn.setAttribute ("value", city)
+btn.textContent = city
+searchHistoryBtn.append(btn)
+
+}
 
 searchButton.addEventListener("click", (event) => {
   event.preventDefault();
   userInput = citySearch.value;
 
   getCurrentWeather(userInput);
+  storage(userInput)
+  historyBtn(userInput);
 });
+
+searchHistoryBtn.addEventListener("click", ()=> {
+    var btnClick = this.event.target.value
+    console.log(btnClick)
+    getCurrentWeather(btnClick)
+})
