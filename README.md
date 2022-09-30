@@ -11,4 +11,6 @@
 
  Im going to make more time to dig deeper into learning how to get through javascript. 
 
+ http://127.0.0.1:5501/index.html
+ https://darbybiddy.github.io/weather-dashboard/
  
